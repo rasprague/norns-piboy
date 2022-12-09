@@ -1,4 +1,6 @@
-# norns
+# WIP, not ready for prime time, check back in after a litte while
+
+# norns-piboy
 _changes. travels. is open to possibilities._
 
 **norns is primarily intended to run on a pi-based sound computer designed by [monome](https://monome.org/norns).**
