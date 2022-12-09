@@ -1,4 +1,4 @@
-# WIP, not ready for prime time, check back in after a litte while
+# WIP, not ready for prime time, check back in after a little while
 
 # norns-piboy
 _changes. travels. is open to possibilities._
