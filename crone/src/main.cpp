@@ -19,6 +19,7 @@ static inline void sleep(int ms) {
 int main() {
     using namespace crone;
     using std::cout;
+    using std::cerr;
     using std::endl;
 
 #if 1
@@ -38,7 +39,12 @@ int main() {
 
 
     cout << "connecting ports... " << endl;
-    m->connectAdcPorts();
+    try {
+      m->connectAdcPorts();
+    } catch (std::runtime_error const& ex) {
+      cerr << ex.what() << endl;
+      cerr << "Skipping." << endl;
+    }
     m->connectDacPorts();
     m->connect<2, 2>(sc.get(), MixerClient::SinkCut, SoftcutClient::SourceAdc);
     sc->connect<6, 6>(m.get(), 0, MixerClient::SourceCut);
@@ -67,7 +73,12 @@ int main() {
     sc->setup();
     sc->start();
 
-    sc->connectAdcPorts();
+    try {
+      sc->connectAdcPorts();
+    } catch (std::runtime_error const& ex) {
+      cerr << ex.what() << endl;
+      cerr << "Skipping." << endl;
+    }
     sc->connectDacPorts();
 
     OscInterface::init();

@@ -282,6 +282,7 @@ function _menu.dpad(axis,value)
 end
 
 function _menu.button(b,value)
+  io.stderr:write("*** _menu.button", " b=", b, " value=", value, "\n")
   if value==1 or value==0 then
     if b == "B" then
       _menu.key(2,value)

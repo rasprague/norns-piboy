@@ -42,7 +42,7 @@ static void* input_sdl_poll(void* data) {
     (void)data;
     // for now, we don't actually want to use keyboard input
     // (leave it for scripts / menu)
-#if 0
+#if 1
     SDL_Event event;
     union event_data *ev;
     fprintf(stderr, "starting SDL input loop\n"); 
@@ -54,61 +54,66 @@ static void* input_sdl_poll(void* data) {
             case SDL_KEYUP: {
                 fprintf(stderr, "key event\n");
                 int z = event.type == SDL_KEYDOWN ? 1 : 0;
+
                 switch (event.key.keysym.sym) {
-                    case SDL_SCANCODE_Q:
-                        ev = event_data_new(EVENT_KEY);
-                        ev->key.n = 0;
-                        ev->key.val = z;
-                        event_post(ev);
-                        break;
-                    case SDL_SCANCODE_A:
+		     case SDLK_q:
                         ev = event_data_new(EVENT_KEY);
                         ev->key.n = 1;
                         ev->key.val = z;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_Z:
+		     case SDLK_a:
                         ev = event_data_new(EVENT_KEY);
                         ev->key.n = 2;
                         ev->key.val = z;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_W:
-                        ev = event_data_new(EVENT_ENC);
-                        ev->enc.n = 0;
-                        ev->enc.delta = -1;
+		     case SDLK_z:
+                        ev = event_data_new(EVENT_KEY);
+                        ev->key.n = 3;
+                        ev->key.val = z;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_E:
-                        ev = event_data_new(EVENT_ENC);
-                        ev->enc.n = 0;
-                        ev->enc.delta = 1;
-                        event_post(ev);
-                        break;
-                    case SDL_SCANCODE_S:
+		     case SDLK_w:
                         ev = event_data_new(EVENT_ENC);
                         ev->enc.n = 1;
                         ev->enc.delta = -1;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_D:
+		     case SDLK_e:
                         ev = event_data_new(EVENT_ENC);
                         ev->enc.n = 1;
                         ev->enc.delta = 1;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_X:
+		     case SDLK_s:
                         ev = event_data_new(EVENT_ENC);
                         ev->enc.n = 2;
                         ev->enc.delta = -1;
                         event_post(ev);
                         break;
-                    case SDL_SCANCODE_C:
+		     case SDLK_d:
                         ev = event_data_new(EVENT_ENC);
                         ev->enc.n = 2;
                         ev->enc.delta = 1;
                         event_post(ev);
                         break;
+		     case SDLK_x:
+                        ev = event_data_new(EVENT_ENC);
+                        ev->enc.n = 3;
+                        ev->enc.delta = -1;
+                        event_post(ev);
+                        break;
+		     case SDLK_c:
+                        ev = event_data_new(EVENT_ENC);
+                        ev->enc.n = 3;
+                        ev->enc.delta = 1;
+                        event_post(ev);
+                        break;
+		     case SDLK_ESCAPE:
+		        ev = event_data_new(EVENT_QUIT);
+		        event_post(ev);
+		        break;
                     default:
                         break;
                 }
@@ -118,6 +123,6 @@ static void* input_sdl_poll(void* data) {
                 break;
         }
     }
-    #endif
+#endif
     return NULL;
 }

@@ -114,7 +114,7 @@ end
 
 
 function gamepad.process(dev_name,typ,code,val)
-
+  io.stderr:write("*** gamepad.process", " dev_name=", dev_name,  " typ=", typ, " code=", code, " val=", val, "\n")
   local event_code_type
   for k, v in pairs(hid_events.types) do
     if tonumber(v) == typ then
@@ -125,13 +125,14 @@ function gamepad.process(dev_name,typ,code,val)
 
   local do_log_event = gamepad.is_loggable_event(dev_name, event_code_type, code, val)
 
-  if do_log_event and debug_level >= 2 then
+  if true then --do_log_event and debug_level >= 2 then
     local keycode = gamepad.code_2_keycode(event_code_type, code)
     local msg = "hid.event" .."\t".. " type: "..typ .."\t".. " code: ".. code .."\t".. " value: "..val
     if keycode then
       msg = msg .."\t".. " keycode: "..keycode
     end
     print(msg)
+    io.stderr:write("*** ", msg, "\n")
   end
 
   local event_key

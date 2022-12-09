@@ -106,5 +106,7 @@ static cairo_surface_t *screen_sdl_surface_create(screen_sdl_priv_t *priv) {
                                                   cairo_format_stride_for_width(CAIRO_FORMAT_RGB16_565, priv->draw_surface->w));
     cairo_surface_set_user_data(surface, NULL, priv, &screen_sdl_surface_destroy);
 
+    SDL_ShowCursor(SDL_DISABLE);
+
     return surface;
 }
